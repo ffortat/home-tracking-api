@@ -1,12 +1,10 @@
 import express from "express";
+import * as routes from "./route";
 
 const app = express();
 const port = 8081; // default port to listen
 
-// define a route handler for the default home page
-app.get( "/", ( req, res ) => {
-    res.send( "Hello world!" );
-} );
+routes.register(app);
 
 // start the Express server
 app.listen( port, () => {
