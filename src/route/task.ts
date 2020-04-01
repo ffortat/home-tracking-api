@@ -1,7 +1,22 @@
 import * as express from 'express';
+import {TaskController} from "../controller/task.controller";
 
 export function register(app: express.Application, baseUrl: string): void {
-    app.get(baseUrl + '/task', (req, res) => {
-        res.json({hello: 'world'});
+    app.get(baseUrl + '/task', (request, response) => {
+        TaskController.listTasks(request.query).then((tasks) => {
+            response.json(tasks);
+        });
+    });
+
+    app.get(baseUrl + '/task/:actionId', (request, response) => {
+        TaskController.getTask(request.params.actionId).then((task) => {
+            response.json(task);
+        });
+    });
+
+    app.post(baseUrl + '/task', (request, response) => {
+        TaskController.addTask(request.body).then((task) => {
+            response.json(task);
+        })
     });
 }
