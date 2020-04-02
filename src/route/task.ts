@@ -8,8 +8,8 @@ export function register(app: express.Application, baseUrl: string): void {
         });
     });
 
-    app.get(baseUrl + '/task/:actionId', (request, response) => {
-        TaskController.getTask(request.params.actionId).then((task) => {
+    app.get(baseUrl + '/task/:taskId', (request, response) => {
+        TaskController.getTask(request.params.taskId).then((task) => {
             response.json(task);
         });
     });
