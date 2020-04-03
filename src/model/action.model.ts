@@ -1,13 +1,14 @@
-import mongoose, {Schema, Types} from 'mongoose';
+import mongoose, {Schema} from 'mongoose';
 
 export interface IAction {
-    id: number;
-    timestamp: number;
+    _id?: string;
+    date: Date;
+    task: string;
 }
 
 const ActionSchema = new Schema({
     date: {type: Date, default: Date.now},
-    task: Types.ObjectId
+    task: Schema.Types.ObjectId
 });
 
 export const Action = mongoose.model('Action', ActionSchema);
