@@ -3,14 +3,20 @@ import {ActionController} from "../controller/action.controller";
 
 export function register(app: express.Application, baseUrl: string): void {
     app.get(baseUrl + '/action', (request, result) => {
-        result.json(ActionController.listActions());
+        ActionController.listActions(request.query).then((actions) => {
+            result.json(actions);
+        });
     });
 
     app.get(baseUrl + '/action/:actionId', (request, result) => {
-        result.json(ActionController.getAction(+request.params.actionId));
+        ActionController.getAction(request.params.actionId).then((action) => {
+            result.json(action);
+        });
     });
 
     app.post(baseUrl + '/action', (request, result) => {
-        result.json(ActionController.addAction(new Date().getTime()));
+        ActionController.addAction(request.body).then((action) => {
+            result.json(action);
+        });
     });
 }
