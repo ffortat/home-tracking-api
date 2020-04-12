@@ -9,6 +9,8 @@ mongoose.connect('mongodb://localhost/tracking', {useNewUrlParser: true, useUnif
 
 app.use((request, response, next) => {
     response.setHeader('Access-Control-Allow-Origin', '*');
+    response.setHeader('Access-Control-Allow-Methods', 'GET, POST');
+    response.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type, Authorization');
     next();
 });
 app.use(express.urlencoded({extended: true}));
