@@ -7,6 +7,10 @@ const port = 8081; // default port to listen
 
 mongoose.connect('mongodb://localhost/tracking', {useNewUrlParser: true, useUnifiedTopology: true});
 
+app.use((request, response, next) => {
+    response.setHeader('Access-Control-Allow-Origin', '*');
+    next();
+});
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 routes.register(app);
