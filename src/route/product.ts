@@ -25,4 +25,10 @@ export function register(app: express.Application, baseUrl: string): void {
             response.json(product);
         });
     });
+
+    app.delete(baseUrl + '/product/:productId', (request, response) => {
+        ProductController.deleteProduct(request.params.productId).then((product) => {
+            response.json(product);
+        });
+    });
 }

@@ -61,4 +61,18 @@ export class ProductController {
             });
         });
     }
+
+    static deleteProduct(id: any): Promise<any> {
+        return new Promise((resolve, reject) => {
+            this.getProduct(id).then((existingProduct) => {
+                existingProduct.remove().then((result: any) => {
+                    resolve(result);
+                }, (error: any) => {
+                    reject(error);
+                });
+            }, (error) => {
+                reject(error);
+            });
+        });
+    }
 }
