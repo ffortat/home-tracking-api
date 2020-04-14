@@ -19,4 +19,10 @@ export function register(app: express.Application, baseUrl: string): void {
             response.json(product);
         })
     });
+
+    app.patch(baseUrl + '/product/:productId', (request, response) => {
+        ProductController.patchProduct(request.params.productId, request.body).then((product) => {
+            response.json(product);
+        });
+    });
 }

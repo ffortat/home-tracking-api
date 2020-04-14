@@ -14,11 +14,11 @@ export class ProductController {
         })
     }
 
-    static async addProduct(task: IProduct): Promise<any> {
+    static async addProduct(product: IProduct): Promise<any> {
         return new Promise((resolve, reject) => {
-            const newProduct = new Product(task);
+            const newProduct = new Product(product);
 
-            Product.find(task, (error, result) => {
+            Product.find(product, (error, result) => {
                 if (error) {
                     reject(error);
                     return;
@@ -43,6 +43,22 @@ export class ProductController {
 
                 resolve(result);
             })
+        });
+    }
+
+    static patchProduct(id: string, product: IProduct): Promise<any> {
+        return new Promise((resolve, reject) => {
+            this.getProduct(id).then((existingProduct) => {
+                existingProduct.name = product.name ? product.name : existingProduct.name;
+                existingProduct.quantity = product.quantity ? product.quantity : existingProduct.quantity;
+                existingProduct.unit = product.unit ? product.unit : existingProduct.unit;
+                existingProduct.price = product.price ? product.price : existingProduct.price;
+                existingProduct.date = product.date ? product.date : existingProduct.date;
+
+                existingProduct.save().then((savedProduct: any) => resolve(savedProduct));
+            }, (error) => {
+                reject(error);
+            });
         });
     }
 }
