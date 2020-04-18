@@ -1,5 +1,5 @@
 import * as express from 'express';
-import {ProductController} from "../controller/product.controller";
+import {ProductController} from "../../controller/product.controller";
 
 export function register(app: express.Application, baseUrl: string): void {
     app.get(baseUrl + '/product', (request, response) => {

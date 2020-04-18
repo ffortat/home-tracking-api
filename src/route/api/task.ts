@@ -1,5 +1,5 @@
 import * as express from 'express';
-import {TaskController} from "../controller/task.controller";
+import {TaskController} from "../../controller/task.controller";
 
 export function register(app: express.Application, baseUrl: string): void {
     app.get(baseUrl + '/task', (request, response) => {

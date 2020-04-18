@@ -1,5 +1,5 @@
 import * as express from 'express';
-import {ActionController} from "../controller/action.controller";
+import {ActionController} from "../../controller/action.controller";
 
 export function register(app: express.Application, baseUrl: string): void {
     app.get(baseUrl + '/action', (request, result) => {
