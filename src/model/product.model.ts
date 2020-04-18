@@ -7,6 +7,7 @@ export interface IProduct {
     unit: string;
     price: number;
     date: Date;
+    place: string;
 }
 
 const ProductSchema = new Schema({
@@ -21,7 +22,8 @@ const ProductSchema = new Schema({
     date: {
         type: Date,
         default: Date.now
-    }
+    },
+    place: Schema.Types.ObjectId
 });
 
 export const Product = mongoose.model('Product', ProductSchema);

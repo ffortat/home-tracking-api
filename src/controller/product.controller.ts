@@ -54,6 +54,7 @@ export class ProductController {
                 existingProduct.unit = product.unit ? product.unit : existingProduct.unit;
                 existingProduct.price = product.price ? product.price : existingProduct.price;
                 existingProduct.date = product.date ? product.date : existingProduct.date;
+                existingProduct.place = product.place ? product.place : existingProduct.place;
 
                 existingProduct.save().then((savedProduct: any) => resolve(savedProduct));
             }, (error) => {
