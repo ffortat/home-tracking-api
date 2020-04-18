@@ -14,7 +14,7 @@ export class ProductController {
         })
     }
 
-    static async addProduct(product: IProduct): Promise<any> {
+    static addProduct(product: IProduct): Promise<any> {
         return new Promise((resolve, reject) => {
             const newProduct = new Product(product);
 
@@ -62,7 +62,7 @@ export class ProductController {
         });
     }
 
-    static deleteProduct(id: any): Promise<any> {
+    static deleteProduct(id: string): Promise<any> {
         return new Promise((resolve, reject) => {
             this.getProduct(id).then((existingProduct) => {
                 existingProduct.remove().then((result: any) => {
