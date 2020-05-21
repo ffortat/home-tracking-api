@@ -32,6 +32,11 @@ const TaskSchema = new Schema({
     byDay: {
         type: [Number],
         default: undefined
+    },
+    lastAction: {
+        type: Schema.Types.ObjectId,
+        ref: 'Action',
+        default: undefined
     }
 });
 
