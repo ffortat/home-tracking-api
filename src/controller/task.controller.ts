@@ -35,4 +35,13 @@ export class TaskController {
                 .catch((error) => reject(error));
         });
     }
+
+    static deleteTask(id: string): Promise<any> {
+        return new Promise((resolve, reject) => {
+            this.getTask(id).then((existingTask) => {
+                existingTask.remove()
+                    .then((result: any) => resolve(result));
+            }).catch((error) => reject(error));
+        });
+    }
 }

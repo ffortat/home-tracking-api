@@ -19,4 +19,10 @@ export function register(app: express.Application, baseUrl: string): void {
             response.json(task);
         })
     });
+
+    app.delete(baseUrl + '/task/:taskId', (request, response) => {
+        TaskController.deleteTask(request.params.taskId).then((task) => {
+            response.json(task);
+        })
+    });
 }
