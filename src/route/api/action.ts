@@ -19,4 +19,10 @@ export function register(app: express.Application, baseUrl: string): void {
             result.json(action);
         });
     });
+
+    app.delete(baseUrl + '/action/:actionId', (request, response) => {
+        ActionController.deleteAction(request.params.actionId).then((action) => {
+            response.json(action);
+        });
+    });
 }

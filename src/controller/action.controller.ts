@@ -62,4 +62,30 @@ export class ActionController {
             })
         });
     }
+
+    static deleteAction(id: string): Promise<any> {
+        return new Promise((resolve, reject) => {
+            this.getAction(id).then((existingAction) => {
+                const taskId = existingAction.task;
+                existingAction.remove().then((deletedAction: any) => {
+                    Task.findById(taskId).then((task) => {
+                        Action.findOne({task: taskId}, null, {sort: '-date'})
+                            .then((lastAction) => {
+                                task.set('lastAction', lastAction._id);
+                                task.save().then((savedTask) => resolve(deletedAction));
+                            }, (error) => {
+                                task.set('lastAction', undefined);
+                                task.save().then((savedTask) => resolve(deletedAction));
+                            });
+                    }, (error) => {
+                        resolve(deletedAction);
+                    });
+                }, (error: any) => {
+                    reject(error);
+                });
+            }, (error) => {
+                reject(error);
+            });
+        });
+    }
 }
