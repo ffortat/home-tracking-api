@@ -71,7 +71,11 @@ export class ActionController {
                     Task.findById(taskId).then((task) => {
                         Action.findOne({task: taskId}, null, {sort: '-date'})
                             .then((lastAction) => {
-                                task.set('lastAction', lastAction._id);
+                                if (lastAction) {
+                                    task.set('lastAction', lastAction._id);
+                                } else {
+                                    task.set('lastAction', undefined);
+                                }
                                 task.save().then((savedTask) => resolve(deletedAction));
                             }, (error) => {
                                 task.set('lastAction', undefined);
